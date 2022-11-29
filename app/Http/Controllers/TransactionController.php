@@ -23,14 +23,18 @@ class TransactionController extends Controller
 
     public function store(Request $request){
         try{
+            // dd($request->all(), Carbon::now('GMT+5')  );
             DB::beginTransaction();
-            $start_date = Carbon::now('GMT+5');
-            if($request->payment_cycle == 'annually'){
-                $billing_cycle_renew = 365;
-            }else{
+            // $start_date = Carbon::now('GMT+5');
+            $start_date = $request->sale_date;
+            if($request->payment_cycle == 'monthly'){
                 $billing_cycle_renew = 30;
+                $due_amount = $request->price - $request->advance_payment;
+            }else{
+                $billing_cycle_renew = 0;
+                $due_amount = $request->price - $request->advance_payment;
             }
-            $due_amount = $request->price - $request->advance_payment;
+            // dd($billing_cycle_renew);
             $data = [
                 'customer_id'=> $request->customer_id , 
                 'product_id' => $request->product_id, 
@@ -52,7 +56,7 @@ class TransactionController extends Controller
                 TransactionPayments::create($payment_data);
             }
             DB::commit();
-            return redirect('/');
+            return redirect(route('customer.show' , $request->customer_id));
         }catch(Exception $e){
             DB::rollBack();
             dd($e);

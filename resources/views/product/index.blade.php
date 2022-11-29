@@ -7,7 +7,7 @@
         <div class="col">
         <div class="ms-2 me-2 mt-5">
 
-            <a href="{{route('customer.create')}}"> <button class="btn btn-primary mt-5 ml-3">Add
+            <a href="{{route('product.create')}}"> <button class="btn btn-primary mt-5 ml-3">Add
                 </button></a>
 
             <div>

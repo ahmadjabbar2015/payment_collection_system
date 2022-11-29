@@ -20,9 +20,11 @@ class CreateCustomerBillingDetailsTable extends Migration
             $table->float('due_amount');
             $table->float('total_amount');
             $table->integer('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers');
             $table->integer('product_id')->nullable();
+            $table->foreign('product_id')->references('id')->on('products');
             $table->integer('service_id')->nullable();
-
+            // $table->foreign('service_id')->references('id')->on('services');
 
             $table->timestamps();
         });

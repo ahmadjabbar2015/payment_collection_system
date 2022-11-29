@@ -46,7 +46,9 @@
                                 <th scope="col" class="">Prodcut</th>
                                 <th scope="col" class="">Start date</th>
                                 <th scope="col" class="">Total Price</th>
-                                <th scope="col" class="">Due Remaining</th>
+                                <th scope="col" class="">Amount Paid Till Date</th>
+                                <th scope="col" class="">Next Payment Due</th>
+                                <th scope="col" class="">Next Payment Date</th>
                                 <th scope="col" class="">Actions</th>
                             </tr>
                         </thead>
@@ -121,7 +123,9 @@
                 {data: 'product', name: 'product'},
                 {data: 'start_date', name: 'start_date'},
                 {data: 'total_amount', name: 'total_amount'},
-                {data: 'due_amount', name: 'due_amount'},
+                {data: 'amount_paid', name: 'amount_paid'},
+                {data: 'next_payment', name: 'next_payment'},
+                {data: 'next_payment_date', name: 'next_payment_date'},
                 {
                     data: 'action',
                     name: 'action',

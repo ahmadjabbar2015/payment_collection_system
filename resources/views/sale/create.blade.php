@@ -23,7 +23,7 @@
             
             <div class="col-md-6">
                 <label for="Fname">Customer :*</label>
-                <select class="form-control" name="customer_id" id="">
+                <select class="form-control" name="customer_id" id="customers">
                     <option selected disabled>Select An Option</option>
                     @foreach ($customers as $customer)
                         <option value="{{$customer->id}}">{{$customer->first_name}} {{$customer->last_name}}</option>
@@ -58,22 +58,26 @@
                 <label for="payment_cycle">Payment Cycle</label>
                 <select type="number" class="form-control" required="required" placeholder="0" name="payment_cycle" id="billing_cycle" >
                     <option selected disabled>Please Select An Option</option>
-                    <option value="annually">Annually</option>
+                    <option value="annually">Lifetime</option>
                     <option value="monthly">Monthly</option>
                 </select>
             </div> 
             <div class="col-md-6">
                 <label for="payment_method">Payment Method</label>
                 <select type="number" class="form-control" required="required" placeholder="0" name="payment_method" id="billing_cycle" >
-                    <option selected disabled>Please Select An Option</option>
-                    <option value="cash">Cash</option>
+                    <option disabled>Please Select An Option</option>
+                    <option value="cash" selected>Cash</option>
                     <option value="card">Card</option>
                 </select>
             </div>                       
+                                   
         </div><br>
 
         <div class="row ">
-            
+            <div class="col-md-6">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" required="required" placeholder="0" name="sale_date" id="sale_date" >
+            </div>
         </div><br>
         
         <div class="monthly_div " id="monthly_div">
@@ -101,10 +105,16 @@
 
     {{-- @include('layouts.footers.auth') --}}
 @endsection
+
 @section('page-script')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="{{ asset('assets/js/page_scripts/sales.js') }}"></script>
 @endsection
-
 @section('custom-script')
-<script></script>
+<script>
+    $(document).ready(function() {
+        $('#customers').select2();
+    });
+    document.getElementById('sale_date').value = new Date().toISOString().substring(0, 10);
+</script>
 @endsection

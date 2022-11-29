@@ -35,8 +35,8 @@
         </div><br>
         <div class="row ">
             <div class="col-md-4">
-                <label for="email">Email :*</label>
-                <input type="email" class="form-control" required="required" placeholder="email" name="email">
+                <label for="email">Email :</label>
+                <input type="email" class="form-control" placeholder="email" name="email">
             </div>
             <div class="col-md-4">
                 <label>Phone Number :*</label>

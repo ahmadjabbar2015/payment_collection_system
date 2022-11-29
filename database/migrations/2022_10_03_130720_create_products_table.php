@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('version');
             $table->integer('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->integer('default_price');
             $table->timestamps();
         });
