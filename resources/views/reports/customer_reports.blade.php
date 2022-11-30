@@ -5,23 +5,29 @@
     <div class="container">
         <div class="row ">
             <br><br>
-            {{-- <div class="card  mt-5 mx-3" style="width:100%">   
+            <div class="card  mt-5 mx-3" style="width:100%">   
                 <div class="  card-body">
                     <h2 class="card-title">Filters</h2>
                     <div class="d-flex">
                         <div class="col-md-4">
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          </div>
-        
-                          <div class="col-md-4">
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <h6 class="card-subtitle mb-2 text-muted">Due Amount</h6>
+                            <select class="form-control" id="due_amount">
+                                <option value="1000">Greater Than 1000</option>
+                                <option value="2000">Greater Than 2000</option>
+                                <option value="3000">Greater Than 3000</option>
+                                <option value="4000">Greater Than 4000</option>
+                                <option value="5000">Greater Than 5000</option>
+                                <option value="6000">Greater Than 6000</option>
+                                <option value="7000">Greater Than 7000</option>
+                                <option value="8000">Greater Than 8000</option>
+                                <option value="9000">Greater Than 9000</option>
+                                <option value="10000">Greater Than 10000</option>
+                            </select>
                           </div>
                     </div>
                   
                 </div>
-              </div> --}}
+              </div>
         </div>
     
         <div class="row">
@@ -37,7 +43,7 @@
                                 <th scope="col" class="">Due Payment</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
                                 
                                 
                                 @foreach($arr as $customers)
@@ -77,23 +83,20 @@
 @section('custom-script')
 <script>
 $(document).ready(function () {
-    var table = $('.yajra-datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('product.index') }}",
-        columns: [
-            // {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'name', name: 'name'},
-            {data: 'version', name: 'version'},
-            {data: 'default_price', name: 'default_price'},
-            {
-                data: 'action',
-                name: 'action',
-                orderable: true,
-                searchable: true
-            },
-        ]
+    
+    $('#due_amount').on('change', function () {
+        due_amount = $('#due_amount').find(":selected").val();
+        alert(due_amount);
+        $.ajax({
+        type: "get",
+        url: "{{route('customer-reports.all')}}",
+        data: {"due_amount":due_amount},
+        success: function (response) {
+            $('#tbody').html(response);
+        }
+        });        
     });
+    
 });
 </script>
 @endsection

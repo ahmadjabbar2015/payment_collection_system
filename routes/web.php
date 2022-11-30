@@ -56,5 +56,5 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('sales/store' , [TransactionController::class , 'store'])->name('sales.store');
 
 	Route::get('customer-notifications/all' , [CustomerNotifications::class , 'massSMS']);
-	Route::get('customer-report/all' , [ReportController::class , 'all']);
+	Route::get('customer-report/all' , [ReportController::class , 'all'])->name('customer-reports.all');
 });

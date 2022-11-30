@@ -13,11 +13,9 @@ class ReportController extends Controller
 {
     public function all(Request $request){
             $arr = [];
-            if($request->has('due_amount')){
-                $due_amount = $request->due_amount;
-            }else{
+            
                 $due_amount = 0;
-            }
+        
             
             $customers = Customer::join('customer_billing_details as cbd', 'cbd.customer_id', '=', 'customers.id')
                 ->join('products as p', 'p.id', '=', 'cbd.product_id')
@@ -69,8 +67,6 @@ class ReportController extends Controller
        
                 
                 $amount_paid_for_no_of_months =(int) ($data['payment_till_date']/$per_month_amount);
-
-    
                 $amount_to_be_received_till_to_date = (int) $per_month_amount * $months;
                 $customer_due_amount_till_date = $amount_to_be_received_till_to_date - $data['payment_till_date'];
                 
@@ -86,8 +82,20 @@ class ReportController extends Controller
                 
             }
 
+            if(request()->ajax()){
+                $html = ''; 
+                if(request()->has('due_amount')){
+                    $due_amount =(int) request()->due_amount;
+                }
+                foreach($arr as $c){
+                    if($c['payment_due'] > $due_amount){
+                        $html .= '<tr><td>' . $c['customer_name'] . '</td><td>' . $c['payment_due'] . '</td></tr>';
+                    }
+                }
+                return $html;
+            }
+
             return view('reports.customer_reports')->with(compact('arr'));
-            return $arr;
         }
 }
 

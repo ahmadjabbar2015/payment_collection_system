@@ -29,7 +29,7 @@
                 <input type="text" class="form-control" required="required" placeholder="Full name" name="first_name">
             </div>
             <div class="col-md-4">
-                <label for="Fname">First Name :*</label>
+                <label for="Fname">Last Name :*</label>
                 <input type="text" class="form-control" required="required" placeholder="Full name" name="last_name">
             </div>
         </div><br>

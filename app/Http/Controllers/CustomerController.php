@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\CustomerBillingDetail;
 use App\Models\TransactionPayments;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\DB;
@@ -44,21 +45,22 @@ class CustomerController extends Controller
         $validator = $request->validate([
             'first_name' => 'required|max:255',
             'last_name'=> 'required|max:255',
-            'email' => 'required|max:255',
             'mobile_no' => 'required|max:255',
         ]);
 
-        // dd($request->except('_token'));
 
-
+        try{
+        DB::beginTransaction();
         if($validator){
             $data = $request->except('_token' );
             Customer::create($data);
-            return redirect(route('customer.index')); 
         }
-        
-        
-
+        DB::commit();
+        return redirect(route('customer.index')); 
+        }catch(Exception $e){
+        DB::rollBack();
+        dd($e);
+        }
     }
 
     public function show($id){

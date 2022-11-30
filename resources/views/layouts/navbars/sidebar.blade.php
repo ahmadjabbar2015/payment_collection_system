@@ -151,7 +151,11 @@
                 </li>
 
                 {{-- saad --}}
-                
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('customer-reports.all') }}">
+                        <i class="ni ni-tv-2 text-primary"></i> Report
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('icons') }}">
@@ -175,6 +179,7 @@
                         <i class="ni ni-circle-08 text-pink"></i> {{ __('Register') }}
                     </a>
                 </li>
+                
                 
             </ul>
             
