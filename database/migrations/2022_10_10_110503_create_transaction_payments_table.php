@@ -16,6 +16,7 @@ class CreateTransactionPaymentsTable extends Migration
         Schema::create('transaction_payments', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('transaction_id')->unsigned();
+            $table->foreign('transaction_id')->references('id')->on('customer_billing_details');
             $table->integer('amount');
             $table->string('method')->comment('card or cash');
             $table->string('card_transaction_number')->nullable();

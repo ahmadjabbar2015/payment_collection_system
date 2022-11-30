@@ -4,6 +4,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CustomerNotifications;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -55,4 +56,5 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('sales/store' , [TransactionController::class , 'store'])->name('sales.store');
 
 	Route::get('customer-notifications/all' , [CustomerNotifications::class , 'massSMS']);
+	Route::get('customer-report/all' , [ReportController::class , 'all']);
 });

@@ -95,7 +95,7 @@ class CustomerController extends Controller
             if($next_payment_cycle == 30){
                 $amount = $row->total_amount;
                 $amount_paid_for_no_of_months =ceil ($row->amount_paid / $amount);
-                return $next_payment_date = date("d-M-Y", strtotime(date("Y-m-d", strtotime($row->created_at)) . " +".$amount_paid_for_no_of_months." month") ); 
+                return $next_payment_date = date("d-M-Y", strtotime(date("Y-m-d", strtotime($row->start_date)) . " +".$amount_paid_for_no_of_months." month") ); 
             }
           })
           ->addColumn('action', function ($row) {
@@ -188,7 +188,7 @@ class CustomerController extends Controller
             
             $amount_paid_for_no_of_months =ceil($total_amount_paid / $amount);
             $next_payment = ($amount * ($amount_paid_for_no_of_months +1)) - $total_amount_paid;
-            $next_payment_date = date("d-M-Y", strtotime(date("Y-m-d", strtotime($cbd->created_at)) . " +".$amount_paid_for_no_of_months." month") );
+            $next_payment_date = date("d-M-Y", strtotime(date("Y-m-d", strtotime($cbd->start_date)) . " +".$amount_paid_for_no_of_months." month") );
             $next_payment_html = '<div> <span>Next Due Date</span> <span>'.$next_payment_date.'</span></div>
             <div> <span>Next Payment Amount</span> <span>'.$next_payment.'</span></div>
             ';
