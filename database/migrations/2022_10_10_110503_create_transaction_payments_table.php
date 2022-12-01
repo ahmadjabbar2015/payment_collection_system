@@ -27,7 +27,7 @@ class CreateTransactionPaymentsTable extends Migration
             $table->string('card_year')->nullable();
             $table->string('card_security')->nullable();
             $table->string('bank_account_number')->nullable();
-            $table->bigInteger('created_by');
+            $table->bigInteger('created_by')->unsigned();
             $table->foreign('created_by')->references('id')->on('users');
             $table->timestamps();
 

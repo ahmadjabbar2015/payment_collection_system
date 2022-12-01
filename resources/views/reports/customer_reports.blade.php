@@ -86,7 +86,6 @@ $(document).ready(function () {
     
     $('#due_amount').on('change', function () {
         due_amount = $('#due_amount').find(":selected").val();
-        alert(due_amount);
         $.ajax({
         type: "get",
         url: "{{route('customer-reports.all')}}",

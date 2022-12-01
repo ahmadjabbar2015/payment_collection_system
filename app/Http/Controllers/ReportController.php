@@ -54,20 +54,19 @@ class ReportController extends Controller
     
                 $d1 = new DateTime($d1); 
                 $d2 = new DateTime($d2);
-    
+                    
                 $interval = $d2->diff($d1);
                 $interval->m = ($interval->m + (12 * $interval->y));
                 $months = $interval->format('%m');
-
+                    
                 if($customer->billing_cycle_renew == 30){
                     $per_month_amount = $customer->total_amount; 
+                    $amount_paid_for_no_of_months =(int) ($data['payment_till_date']/$per_month_amount);
+                    $amount_to_be_received_till_to_date = (int) $per_month_amount * $months;
                 }else{
-                    $per_month_amount = $customer->total_amount/12;
-                }
-       
+                    $amount_to_be_received_till_to_date = $customer->total_amount ;
+                }     
                 
-                $amount_paid_for_no_of_months =(int) ($data['payment_till_date']/$per_month_amount);
-                $amount_to_be_received_till_to_date = (int) $per_month_amount * $months;
                 $customer_due_amount_till_date = $amount_to_be_received_till_to_date - $data['payment_till_date'];
                 
                 if($amount_to_be_received_till_to_date > $data['payment_till_date']){

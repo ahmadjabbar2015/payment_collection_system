@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\DB;
+use DateTime;
 
 class CustomerController extends Controller
 {
@@ -100,6 +101,36 @@ class CustomerController extends Controller
                 return $next_payment_date = date("d-M-Y", strtotime(date("Y-m-d", strtotime($row->start_date)) . " +".$amount_paid_for_no_of_months." month") ); 
             }
           })
+          ->addColumn('payment_due_till_date', function($row){           
+            $next_payment_cycle = $row->billing_cycle_renew;
+            $amount = $row->total_amount;
+            $amount_paid_till_date = $row->amount_paid;
+
+            if($next_payment_cycle == 30){
+                $amount = $row->total_amount;
+                $d1 = date('Y-m-d', strtotime($row->start_date));
+                $d2 = date('Y-m-d');
+                $d1 = new DateTime($d1); 
+                $d2 = new DateTime($d2);
+                
+                $interval = $d2->diff($d1);
+                $interval->m = ($interval->m + (12 * $interval->y));
+                $months =(int) $interval->format('%m');  
+                $total_amount_till_date = $amount * $months;
+
+                if($total_amount_till_date > $amount_paid_till_date){
+                    return ($total_amount_till_date - $amount_paid_till_date);
+                }else{
+                    return 0;
+                }
+            }else{
+                if($amount > $amount_paid_till_date){
+                    return $amount - $amount_paid_till_date;
+                }else{
+                    return 0;
+                }
+            }
+          })
           ->addColumn('action', function ($row) {
               $actionBtn =
               '<div class="dropdown">
@@ -109,7 +140,7 @@ class CustomerController extends Controller
             </div>';
               return $actionBtn;
           })
-          ->rawColumns(['action', 'next_payment_date'])
+          ->rawColumns(['action', 'next_payment_date','payment_due_till_date'])
           ->make(true);
         //   ->toJson();
             // return Datatables::of($customers)->addIndexColumn();

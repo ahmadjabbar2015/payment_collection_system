@@ -42,7 +42,8 @@ class TransactionController extends Controller
                 'total_amount'=> $request->price , 
                 'billing_cycle_renew' => $billing_cycle_renew,
                 'start_date' => $start_date,
-                'due_amount' => $due_amount
+                'due_amount' => $due_amount,
+                'created_by' => Auth::user()->id,
             ];    
             $customer_billing_details = CustomerBillingDetail::create( $data );
             if($request->advance_payment != 0){

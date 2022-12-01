@@ -86,12 +86,12 @@
                 
                 {{-- saad --}}
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+                    <a class="nav-link active" href="#customers" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="customers">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
                         <span class="nav-link-text" style="color: #f4645f;">{{ __('Customers') }}</span>
                     </a>
 
-                    <div class="collapse show" id="navbar-examples">
+                    <div class="collapse show" id="customers">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('customer.index')}}">
@@ -110,12 +110,12 @@
 
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="#software" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="software">
+                    <a class="nav-link active" href="#products" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="software">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Softwares') }}</span>
+                        <span class="nav-link-text" style="color: #f4645f;">Products</span>
                     </a>
 
-                    <div class="collapse show" id="software">
+                    <div class="collapse show" id="products">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('product.index')}}">

@@ -3,7 +3,11 @@
 
 @section('content')
 
-
+<style>
+    .dataTables_wrapper{
+        overflow: auto;
+    }
+</style>
   
   <!-- Modal -->
   <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
@@ -39,7 +43,7 @@
                 </div>
 
                 <div class="mt-3">
-                    <table class="table mt-4 yajra-datatable" id="mytable" class="w-100 text-center">
+                    <table class="table mt-4 yajra-datatable table-responsive" id="mytable" class="w-100 text-center">
                         <thead>
                             <tr>
                                 
@@ -49,6 +53,7 @@
                                 <th scope="col" class="">Amount Paid Till Date</th>
                                 <th scope="col" class="">Next Payment Due</th>
                                 <th scope="col" class="">Next Payment Date</th>
+                                <th scope="col" class="">Payment Due Till Date</th>
                                 <th scope="col" class="">Actions</th>
                             </tr>
                         </thead>
@@ -126,6 +131,7 @@
                 {data: 'amount_paid', name: 'amount_paid'},
                 {data: 'next_payment', name: 'next_payment'},
                 {data: 'next_payment_date', name: 'next_payment_date'},
+                {data: 'payment_due_till_date', name: 'payment_due_till_date'},
                 {
                     data: 'action',
                     name: 'action',

@@ -19,11 +19,13 @@ class CreateCustomerBillingDetailsTable extends Migration
             $table->integer('billing_cycle_renew')->comment('in days');
             $table->float('due_amount');
             $table->float('total_amount');
-            $table->integer('customer_id');
+            $table->bigInteger('customer_id')->unsigned();
             $table->foreign('customer_id')->references('id')->on('customers');
-            $table->integer('product_id')->nullable();
+            $table->bigInteger('product_id')->unsigned()->nullable();
             $table->foreign('product_id')->references('id')->on('products');
             $table->integer('service_id')->nullable();
+            $table->bigInteger('created_by')->unsigned();
+            $table->foreign('created_by')->references('id')->on('users');
             // $table->foreign('service_id')->references('id')->on('services');
 
             $table->timestamps();
