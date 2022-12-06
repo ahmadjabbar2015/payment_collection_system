@@ -38,7 +38,7 @@ class ProductController extends Controller
         $validator = $request->validate([
             'name' => 'required|max:255',
             'version'=> 'required|max:255',
-            'category_id' => 'required|max:255',
+            // 'category_id' => 'required|max:255',
             'default_price' => 'required|max:255',
         ]);
 
